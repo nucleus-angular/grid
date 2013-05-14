@@ -1,0 +1,15 @@
+<div class="nag-grid-footer">
+  <div class="nag-controls">
+    <a class="nag-first-page-link" href="#" ng-click="options.currentPage = 1"><span aria-hidden="true" class="nag-icon-font-first"></span></a>
+    <a class="nag-previous-page-link inactive" href="#" ng-click="decreaseCurrentPage()"><span aria-hidden="true" class="nag-icon-font-previous"></span></a>
+    <input class="nag-set-page-link" type="textbox" value="{{ options.currentPage }}" ng-mouseup="inputMouseUp($event)" nag-event="{focus: 'focusInput($event)', blur: 'blurInput($event)', keydown: 'keyDownInput($event)'}"/><span class="nag-total-page-count"> of {{ getMaxPage() }}</span>
+    <a class="nag-next-page-link active" href="#" ng-click="increaseCurrentPage()"><span aria-hidden="true" class="nag-icon-font-next"></span></a>
+    <a class="nag-last-page-link" href="#" ng-click="options.currentPage = getMaxPage()"><span aria-hidden="true" class="nag-icon-font-last" ng-click="currentPage = getMaxPage()"></span></a>
+    <select class="nag-record-counts" ng-model="options.itemsPerPage" ng-change="">
+      <option ng-repeat="option in options.itemsPerPageOptions" value="{{ option }}" ng-selected="option == options.itemsPerPage">{{ option }}</option>
+    </select>
+    <span class="nag-record-display-text">
+      <span class="nag-current-records">{{ ((options.currentPage - 1) * options.itemsPerPage) + 1 }}  - {{ getEndingRecordNumber() }}</span> of <span class="nag-total-records">{{ options.totalRecords }}</span>
+    </span>
+  </div>
+</div>

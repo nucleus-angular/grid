@@ -1,0 +1,10 @@
+<div class="nag-data" ng-class="{'nag-selectable': options.rowSelectable}">
+  <ul class="nag-data-header nag-row">
+    <li class="nag-cell nag-selection-toggle" ng-show="options.rowSelectable && options.rowSelectableCheckbox"><input type="checkbox" ng-checked="areAllRecordsSelected()" ng-click="toggleAllRecordSelection()"/></li><li class="nag-cell nag-grid-actions-column nag-selection-toggle">Actions</li><li class="nag-cell {{ config.property }} {{ config.cssClass }} {{ config.cssHeaderClass }}" data-property="{{ config.property }}" ng-show="config.display" nag-grid-header-data-cell ng-repeat="config in options.columnModel" data-template="config.headerTemplateUrl"></li>
+  </ul>
+  <ul class="nag-record nag-row" ng-repeat="(recordKey, data) in options.data" ng-class="{'nag-selected': isRecordSelected(recordKey)}" ng-click="toggleRecordSelection($event, recordKey, 'row')">
+    <li class="nag-cell nag-selection-toggle" ng-show="options.rowSelectable && options.rowSelectableCheckbox">
+      <input type="checkbox" ng-checked="isRecordSelected(recordKey)"  ng-click="toggleRecordSelection($event, recordKey, 'checkbox')" />
+    </li><li class="nag-cell nag-grid-actions-column" nag-grid-actions></li><li class="nag-cell {{ config.property }} {{ config.cssClass }}" data-property="{{ config.property }}" ng-show="config.display" nag-grid-data-cell ng-repeat="config in options.columnModel" data-template="config.templateUrl"></li>
+  </ul>
+</div>

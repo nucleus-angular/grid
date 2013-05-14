@@ -1,0 +1,12 @@
+<div ng-class="{'nag-hide': !options.displaySettings}" class="nag-settings-widget">
+  <ul>
+    <li ng-show="options.rowSelectable">
+      <input type="checkbox" ng-checked="options.rowSelectableCheckbox" ng-click="options.rowSelectableCheckbox = !options.rowSelectableCheckbox" />
+    </li>
+    <li ng-repeat="(key,config) in options.columnModel">
+      <label for="{{ id }}-{{ config.property }}-display-toggle">
+        <input id="{{ id }}-{{ config.property }}-display-toggle" type="checkbox" ng-checked="config.display" ng-click="toggleColumnDisplay(key)" /> {{ config.title }}
+      </label>
+    </li>
+  </ul>
+</div>
