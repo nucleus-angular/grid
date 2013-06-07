@@ -18,8 +18,6 @@ angular.module('nag.grid.data', [])
 
             var html = nagHelper.getAsyncTemplate(template, scope.options);
             element.append($compile(html)(scope));
-
-            console.log(scope.options);
           }
         };
       }

@@ -1,6 +1,6 @@
 {
   "name": "nucleus-angular-grid",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "dependencies": {
     "nucleus-angular-core": "latest",
     "object-array-utility": "latest"
