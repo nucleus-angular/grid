@@ -13,9 +13,9 @@ angular.module('nag.grid.headerDataCell', [])
         return {
           pre: function(scope, element, attributes) {
             var template = scope.$eval(attributes.template);
-            $(element).addClass('nag-grid-header-data-cell');
+            $(element).addClass('grid-header-data-cell');
 
-            var html = nagHelper.getAsyncTemplate(template);
+            var html = nagHelper.getAsyncTemplate(template, scope.options);
             element.append($compile(html)(scope));
           }
         };

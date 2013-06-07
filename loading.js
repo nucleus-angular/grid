@@ -13,9 +13,9 @@ angular.module('nag.grid.loading', [])
         return {
           pre: function(scope, element) {
             var template = scope.options.loadingTemplateUrl;
-            $(element).addClass('nag-grid-loading');
+            $(element).addClass('grid-loading');
 
-            var html = nagHelper.getAsyncTemplate(template);
+            var html = nagHelper.getAsyncTemplate(template, scope.options);
             element.append($compile(html)(scope));
           }
         };

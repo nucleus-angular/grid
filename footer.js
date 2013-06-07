@@ -13,9 +13,9 @@ angular.module('nag.grid.footer', [])
         return {
           pre: function(scope, element) {
             var template = scope.options.footerTemplateUrl;
-            $(element).addClass('nag-grid-footer');
+            $(element).addClass('grid-footer');
 
-            var html = nagHelper.getAsyncTemplate(template);
+            var html = nagHelper.getAsyncTemplate(template, scope.options);
             element.append($compile(html)(scope));
           }
         };

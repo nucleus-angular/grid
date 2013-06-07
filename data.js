@@ -14,10 +14,12 @@ angular.module('nag.grid.data', [])
         return {
           pre: function(scope, element) {
             var template = scope.options.dataTemplateUrl;
-            $(element).addClass('nag-grid-data');
+            $(element).addClass('grid-data');
 
-            var html = nagHelper.getAsyncTemplate(template);
+            var html = nagHelper.getAsyncTemplate(template, scope.options);
             element.append($compile(html)(scope));
+
+            console.log(scope.options);
           }
         };
       }

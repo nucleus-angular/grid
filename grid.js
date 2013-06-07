@@ -32,19 +32,19 @@ angular.module('nag.grid.grid', [
           pre: function(scope, element, attributes) {
             scope.options = nagDefaults.getGridOptions(scope.options);
 
-            var html = $(nagHelper.getAsyncTemplate(scope.options.templateUrl));
+            var html = $(nagHelper.getAsyncTemplate(scope.options.templateUrl, scope.options));
             $(element).append($compile(html)(scope));
 
-            $(element).addClass('nag-grid');
+            $(element).addClass('grid');
           },
           post: function(scope, element, attributes) {
             var autoResizeGridColumns, resizableGrid, getData;
             autoResizeGridColumns = function() {
               var minWidth;
-              var columnCount = $(element).find('.nag-data .nag-data-header .nag-cell').length;
+              var columnCount = $(element).find('.data .data-header .cell').length;
 
               for(var x = 0; x <= columnCount; x += 1) {
-                var property = $(element).find('.nag-data .nag-data-header .nag-cell:eq(' + x + ')').data('property');
+                var property = $(element).find('.data .data-header .cell:eq(' + x + ')').data('property');
 
                 if(property) {
                   var columnModel = ObjectArray.getObjectByPropertyValue(scope.options.columnModel, 'property', property);
@@ -52,7 +52,7 @@ angular.module('nag.grid.grid', [
                   if(columnModel.width === 0) {
                     minWidth = (scope.options.minColumnWidth >= columnModel.minWidth ? scope.options.minColumnWidth : columnModel.minWidth);
                     var maxWidth = (scope.options.maxColumnWidth >= columnModel.maxWidth ? scope.options.maxColumnWidth : columnModel.maxWidth);
-                    var $cells = $(element).find('.nag-data .nag-row .nag-cell.' + columnModel.property);
+                    var $cells = $(element).find('.data .row .cell.' + columnModel.property);
 
                     $.each($cells, function(key, value) {
                       minWidth = (minWidth < $(value).width() ? $(value).width() : minWidth);
@@ -65,16 +65,16 @@ angular.module('nag.grid.grid', [
                     minWidth = columnModel.width;
                   }
 
-                  $(element).find('.nag-data .nag-row .nag-cell.' + columnModel.property).width(minWidth);
-                } else if ($(element).find('.nag-data .nag-data-header .nag-cell:eq(' + x + ')').hasClass('nag-grid-actions-column')) {
+                  $(element).find('.data .row .cell.' + columnModel.property).width(minWidth);
+                } else if ($(element).find('.data .data-header .cell:eq(' + x + ')').hasClass('grid-actions-column')) {
                   minWidth = 0;
-                  var $cells = $(element).find('.nag-data .nag-row .nag-cell.nag-grid-actions-column');
+                  var $cells = $(element).find('.data .row .cell.grid-actions-column');
 
                   $.each($cells, function(key, value) {
                     minWidth = (minWidth < $(value).width() ? $(value).width() : minWidth);
                   });
 
-                  $(element).find('.nag-data .nag-row .nag-cell.nag-grid-actions-column').width(minWidth);
+                  $(element).find('.data .row .cell.grid-actions-column').width(minWidth);
                 }
               }
 
@@ -88,8 +88,8 @@ angular.module('nag.grid.grid', [
             scope.autoResize = autoResizeGridColumns;
 
             resizableGrid = function() {
-              angular.forEach($(element).find('.nag-data .nag-row'), function(row, key) {
-                angular.forEach($(row).find('.nag-cell'), function(cell, key) {
+              angular.forEach($(element).find('.data .row'), function(row, key) {
+                angular.forEach($(row).find('.cell'), function(cell, key) {
                   var property = $(cell).data('property');
 
                   if(property) {
@@ -107,13 +107,16 @@ angular.module('nag.grid.grid', [
                         maxWidth = null;
                       }
 
-                      $(element).find('.nag-data .nag-row .nag-cell.' + columnModel.property).resizable({
+                      $(element).find('.data .row .cell.' + columnModel.property).resizable({
                         handles: 'e',
                         minWidth: minWidth,
                         maxWidth: maxWidth
-                      });
+                      }).bind("resize", function (e, ui) {
+                        //height should always be 100%
+                        $(this).css("height", "100%");
+                      });;
                       $(cell).resize(function() {
-                        $(element).find('.nag-data .nag-row .nag-cell.' + columnModel.property).width($(this).width());
+                        $(element).find('.data .row .cell.' + columnModel.property).width($(this).width());
                       });
                     }
                   }
@@ -207,13 +210,13 @@ angular.module('nag.grid.grid', [
               scope.displayLoading = !scope.displayLoading;
 
               if(scope.displayLoading === true) {
-                $(element).find('.nag-grid-header').css('visibility', 'hidden');
-                $(element).find('.nag-grid-data').css('visibility', 'hidden');
-                $(element).find('.nag-grid-footer').css('visibility', 'hidden');
+                $(element).find('.grid-header').css('visibility', 'hidden');
+                $(element).find('.grid-data').css('visibility', 'hidden');
+                $(element).find('.grid-footer').css('visibility', 'hidden');
               } else {
-                $(element).find('.nag-grid-header').css('visibility', 'visible');
-                $(element).find('.nag-grid-data').css('visibility', 'visible');
-                $(element).find('.nag-grid-footer').css('visibility', 'visible');
+                $(element).find('.grid-header').css('visibility', 'visible');
+                $(element).find('.grid-data').css('visibility', 'visible');
+                $(element).find('.grid-footer').css('visibility', 'visible');
               }
             }
 
@@ -267,11 +270,11 @@ angular.module('nag.grid.grid', [
                   scope.sortOrder.push(property);
                 }
 
-                $(element).find('.nag-data .nag-data-header .nag-sortable').removeClass('nag-sort-asc').removeClass('nag-sort-desc');
+                $(element).find('.data .data-header .sortable').removeClass('sort-asc').removeClass('sort-desc');
 
                 for(sortKey in scope.options.sort) {
-                  fontIconClass = (scope.options.sort[sortKey] === 'asc' ? 'nag-sort-asc' : 'nag-sort-desc')
-                  $(element).find('.nag-data .nag-data-header .' + sortKey + ' .nag-sortable').addClass(fontIconClass);
+                  fontIconClass = (scope.options.sort[sortKey] === 'asc' ? 'sort-asc' : 'sort-desc')
+                  $(element).find('.data .data-header .' + sortKey + ' .sortable').addClass(fontIconClass);
                 }
 
                 if(scope.options.currentPage !== 1) {
@@ -324,16 +327,16 @@ angular.module('nag.grid.grid', [
                 scope.options.currentPage = 1;
               }
 
-              $(element).find('.nag-set-page-link').val(scope.options.currentPage);
+              $(element).find('.set-page-link').val(scope.options.currentPage);
               getData();
             });
 
             scope.displayLoading = false;
-            scope.id = $('nag-grid').length;
+            scope.id = $('grid').length;
             scope.sortOrder = [];
 
             $timeout(function(){
-              $(element).find('.nag-settings-widget').css('top', $(element).find('.nag-grid-header').outerHeight(true) + 5);
+              $(element).find('.settings-widget').css('top', $(element).find('.grid-header').outerHeight(true) + 5);
             }, 0);
           }
         };

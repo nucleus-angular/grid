@@ -12,9 +12,9 @@ angular.module('nag.grid.actions', [])
       compile: function() {
         return {
           pre: function(scope, element, attributes) {
-            var html = nagHelper.getAsyncTemplate(scope.options.actionsTemplateUrl);
+            var html = nagHelper.getAsyncTemplate(scope.options.actionsTemplateUrl, scope.options);
             $(element).append($compile(html)(scope));
-            $(element).addClass('nag-grid-actions');
+            $(element).addClass('grid-actions');
           }
         };
       }
