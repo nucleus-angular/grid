@@ -8,7 +8,6 @@ angular.module('nag.grid.footer', [])
   function($compile, $http, $templateCache, nagHelper, nagDefaults) {
     var ngCell = {
       restrict: 'A',
-      scope: false,
       compile: function() {
         return {
           pre: function(scope, element) {

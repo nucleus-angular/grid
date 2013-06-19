@@ -9,7 +9,6 @@ angular.module('nag.grid.data', [])
   function($compile, $http, $templateCache, $timeout, nagHelper, nagDefaults) {
     var ngCell = {
       restrict: 'A',
-      scope: false,
       compile: function() {
         return {
           pre: function(scope, element) {
