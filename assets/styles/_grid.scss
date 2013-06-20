@@ -54,12 +54,7 @@
 .nag-grid .nag-data .nag-data-header [class*="nag-sort-"]:after,
 .nag-grid .nag-grid-header .nag-settings:after,
 .nag-grid .nag-data .nag-data-header .nag-sortable:after {
-  font-family: 'nag-icon-fonts';
-  font-style: normal;
-  speak: none;
-  font-weight: normal;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
+  @extend %nag-icon-font;
   float: right;
   width: 16px;
   text-align: center;
