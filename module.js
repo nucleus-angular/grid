@@ -1,3 +1,4 @@
+//todo: document
 angular.module('nag.grid', [
   'nag.resizable',
   'nag.grid.actions',

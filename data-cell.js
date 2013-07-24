@@ -1,3 +1,11 @@
+/**
+ * Data cell component for the grid system
+ *
+ * @mdoule ng.grid.dataCell
+ * @ngdirective nagGridDataCell
+ *
+ * @nghtmlattribute {empty} nag-grid-data-cell Tell AngularJS this element is a grid data cell component
+ */
 angular.module('nag.grid.dataCell', [])
 .directive('nagGridDataCell', [
   '$compile',

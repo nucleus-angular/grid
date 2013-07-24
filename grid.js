@@ -1,14 +1,18 @@
+
 /**
- * todo: features to add
- * todo: filtering
- * todo: row reordering
- * todo: handle data loading error gracefully
+ * Grid component
  *
- * IDEAS TO THINK ABOUT
+ * @todo: filtering
+ * @todo: row reordering
+ * @todo: handle data loading error gracefully
+ * @todo: think: should we have abbr tags to display full value if part of data is being hidden
+ * @todo: think: should we have disable normal text selection and add other functionality that makes is easier to select the data from a cell when row selection is on
+ * @todo: think: should we have either or both hitting esc of clicking outside the column-selection area hide it is the column selection area is showing
  *
- * todo: think: should we have abbr tags to display full value if part of data is being hidden?
- * todo: think: should we have disable normal text selection and add other functionality that makes is easier to select the data from a cell when row selection is on?
- * todo: think: should we have either or both hitting esc of clicking outside the column-selection area hide it is the column selection area is showing?
+ * @module nag.grid.grid
+ * @ngdirective nagGrid
+ *
+ * @nghtmlattribute {object} nag-grid Tells AngularJS this element is a grid component and object pased in overwrite defaults for $scope.options
  */
 
 angular.module('nag.grid.grid', [
@@ -30,6 +34,73 @@ angular.module('nag.grid.grid', [
       compile: function() {
         return {
           pre: function(scope, element, attributes) {
+            /**
+             * Options
+             *
+             * @ngscope
+             * @property {object} options
+             *   @property {string} [option.rootTemplatePath=rootTemplatePath+'/nucleus-angular-grid/assets/templates'] Root path for templates
+             *   @property {string} [option.caption] Caption for grid
+             *   @property {number} [option.currentPage=1] Current page fof data displaying in the grid
+             *   @property {array} [option.data=[]] Current set of data displaying in the grid
+             *   @todo: implement: implement filters
+             *   @property {array} [option.filters=[]] Filter to apply when retrieving the data for the grid
+             *   @property {function} [option.generateDataUrl] Generates the url to use when retrieving data from the grid
+             *   @property {array} [option.itemsPerPageOptions[10, 20, 30, 40, 50]] The different option the use can choose from from items per page in grid
+             *   @property {number} [option.itemsPerPage=10] The current number of items displaying per page in the grid
+             *   @property {number} [option.maxColumnWidth=0] Maximum column width (0 for no max)
+             *   @property {number} [option.minColumnWidth=50] Minimum column width
+             *   @property {string} [option.remoteDataMethod="GET"] Default http method from retrieving the data for the grid
+             *   @todo: implement: implement reorderable
+             *   @property {boolean} [option.reorderable=false] Whether or not you can reorder the data rows
+             *   @property {boolean} [option.rowMultiSelect=true] Whether or not you can select multiple rows
+             *   @property {boolean} [option.rowSelectable=false] Whether or not you can select rows
+             *   @property {boolean} [option.rowSelectableCheckbox=true] Whether or not to use a checkbox to selct the row
+             *   @property {string} [option.rowSelectionMode="row"] Row selection mode ("row" only option right now)
+             *   @property {string} [option.headerTemplateUrl="header.html"] Header template url
+             *   @property {string} [option.headerTemplate=null] Header template html
+             *   @property {string} [option.footerTemplateUrl="footer.html"] Footer template url
+             *   @property {string} [option.footerTemplate=null] Footer template html
+             *   @property {string} [option.settingsTemplateUrl="settings.html"] Settings template url
+             *   @property {string} [option.settingsTemplate=null] Setting template html
+             *   @property {string} [option.loadingTemplateUrl="loading.html"] Loading template url
+             *   @property {string} [option.loadingTemplat=null] Loading template html
+             *   @property {string} [option.dataTemplateUrl="data.html"] Data template url
+             *   @property {string} [option.dataTemplate=null] Data template html
+             *   @property {string} [option.actionsTemplateUrl="actions.html"] Actions template url
+             *   @property {string} [option.actionsTemplate=null] Actions template html
+             *   @property {boolean} [option.rowShiftMultiSelect] Require shift to be held down when selection multiple rows
+             *   @property {array} [option.selected=[]] Indexes (zero-based) or select row elements
+             *   @property {object} [option.sort={}] Sort information
+             *   @property {boolean} [option.sortMulti=true] Whether or not to allow sorting on multiple columns
+             *   @property {number} [option.totalRecords] Total number of records for the grid
+             *   @property {string} [option.templateUrl="grid.html] Main template url
+             *   @property {string} [option.template=null] Main template html
+             */
+
+            /**
+             * Column Model
+             *
+             * @ngscope
+             * @property {object} options.columnModel
+             *   @property {string} [option.columnModel.rootTemplatePath=rootTemplatePath+'/nucleus-angular-grid/assets/templates'] Root path for templates
+             *   @property {string} [options.columnModel.title=null] Text to use as the header in the column of the grid
+             *   @property {string} [options.columnModel.property=null] The property name of the object stored in options.data to pull the data for
+             *   @property {string} [options.columnModel.headerTemplateUrl="header-data-cell.html"] Header data cell template url
+             *   @property {string} [options.columnModel.headerTemplate=null] Header data cell template html
+             *   @property {string} [options.columnModel.templateUrl="data-cell.html"] Data cell template url
+             *   @property {string} [options.columnModel.template=null] Data cell template html
+             *   @property {boolean} [options.columnModel.display=true] Whether or not to display the column
+             *   @property {boolean} [options.columnModel.sortable=false] Whether or not the column is sortable
+             *   @property {boolean} [options.columnModel.resizable=true] Whether or not the column is resizable
+             *   @todo: implement: implement filterable
+             *   @property {boolean} [options.columnModel.filterable=false] Whether or not the column is filterable
+             *   @property {number} [options.columnModel.width=0] The current width of the column
+             *   @property {number} [options.columnModel.minWidth=0] Minimum width of the column
+             *   @property {number} [options.columnModel.maxWidth=0] Maximum width of the column
+             *   @property {string} [options.columnModel.cssClass=""] String to add to the class of the data cells
+             *   @property {string} [options.columnModel.cssHeaderClass=""] String to add to the class of the header data cells
+             */
             scope.options = nagDefaults.getGridOptions(scope.options);
 
             var html = $(nagHelper.getAsyncTemplate(scope.options.templateUrl, scope.options));
@@ -39,6 +110,12 @@ angular.module('nag.grid.grid', [
           },
           post: function(scope, element, attributes) {
             var autoResizeGridColumns, resizableGrid, getData;
+            /**
+             * Automatically resizes the grid columns
+             *
+             * @ngscope
+             * @method autoResize
+             */
             autoResizeGridColumns = function() {
               var minWidth;
               var columnCount = $(element).find('.data .data-header .cell').length;
@@ -144,12 +221,32 @@ angular.module('nag.grid.grid', [
               }, 500);
             };
 
+            /**
+             * Determines if the passed record number is a currently selected record
+             *
+             * @ngscope
+             * @method isRecordSelected
+             *
+             * @param {number} recordNumber Record number (one-based) of the data array
+             *
+             * @returns {boolean} Whether passed record number is currently selected
+             */
             scope.isRecordSelected = function(recordNumber) {
               recordNumber += 1;
 
               return (scope.options.selected.indexOf(recordNumber) !== -1);
             }
 
+            /**
+             * Toggle the record selection state of the passed index (zero-based)
+             *
+             * @ngscope
+             * @method toggleRecordSelection
+             *
+             * @param {object} $event Event
+             * @param {number} recordNumber Record number (one-based) to toggle selection state
+             * @param {string} type Type of selection (must match scope.options.rowSelectionMode is order for selection state to toggle)
+             */
             scope.toggleRecordSelection = function($event, recordNumber, type) {
               if(type === scope.options.rowSelectionMode) {
                 recordNumber += 1;
@@ -166,10 +263,24 @@ angular.module('nag.grid.grid', [
               }
             }
 
+            /**
+             * Determines is all records are selection
+             *
+             * @ngscope
+             * @ngmethod areAllRecordsSelected
+             *
+             * @returns {boolean} Whether or not all record are selected
+             */
             scope.areAllRecordsSelected = function() {
               return (scope.options.data.length > 0 && scope.options.selected.length === scope.options.data.length);
             }
 
+            /**
+             * Toggle all record selection states
+             *
+             * @ngscope
+             * @method toggleAllRecordSelection
+             */
             scope.toggleAllRecordSelection = function() {
               if(scope.options.selected.length < scope.options.data.length) {
                 var allArray = [];
@@ -184,29 +295,68 @@ angular.module('nag.grid.grid', [
               }
             }
 
+            /**
+             * Decrease the current page
+             *
+             * @ngscope
+             * @method decreaseCurrentPage
+             */
             scope.decreaseCurrentPage = function() {
               scope.options.currentPage = (scope.options.currentPage - 1 > 1 ? scope.options.currentPage - 1 : 1);
             };
 
+            /**
+             * Increase the current page
+             *
+             * @ngscope
+             * @method increaseCurrentPage
+             */
             scope.increaseCurrentPage = function() {
               scope.options.currentPage = (scope.options.currentPage + 1 < scope.getMaxPage() ? scope.options.currentPage + 1 : scope.getMaxPage());
             };
 
+            /**
+             * Retrieve the max page number
+             *
+             * @ngscope
+             * @method getMaxPage
+             *
+             * @returns {number} Max page number
+             */
             scope.getMaxPage = function() {
               return Math.ceil(scope.options.totalRecords / scope.options.itemsPerPage);
             };
 
+            /**
+             * Determine the ending record number for the current page
+             *
+             * @ngscope
+             * @method getEndingRecordNumber
+             *
+             * @returns {number} Current page ending record number
+             */
             scope.getEndingRecordNumber = function() {
               var calculatedValue = scope.options.currentPage * scope.options.itemsPerPage;
               return (calculatedValue < scope.options.totalRecords ? calculatedValue : scope.options.totalRecords);
             };
 
+            /**
+             * Toggle the display of a column
+             *
+             * @param {number} key Number of the index (zero-based) of the column you wish to toggle display
+             */
             scope.toggleColumnDisplay = function(key) {
               scope.options.columnModel[key].display = !scope.options.columnModel[key].display;
               autoResizeGridColumns();
             };
 
-            scope.toggleLoadingDisplay = function(forcedStatus) {
+            /**
+             * Toggle display of loading component
+             *
+             * @ngscope
+             * @method toggleLoadingDisplay
+             */
+            scope.toggleLoadingDisplay = function() {
               scope.displayLoading = !scope.displayLoading;
 
               if(scope.displayLoading === true) {
@@ -220,24 +370,73 @@ angular.module('nag.grid.grid', [
               }
             }
 
+            /**
+             * Focus input event handler
+             *
+             * @todo: refactor: give more description name
+             *
+             * @ngscope
+             * @method focusInput
+             *
+             * @param $event
+             */
             scope.focusInput = function($event) {
               $event.target.select();
             }
 
+            /**
+             * Blur input event handler
+             *
+             * @todo: refactor: give more description name
+             *
+             * @ngscope
+             * @method blurInput
+             *
+             * @param $event
+             */
             scope.blurInput = function($event) {
               scope.options.currentPage = $($event.target).val();
             }
 
+            /**
+             * Mouseup input event handler
+             *
+             * @todo: refactor: give more description name, normalize like the other
+             *
+             * @ngscope
+             * @method inputMouseUp
+             *
+             * @param $event
+             */
             scope.inputMouseUp = function($event){
               $event.preventDefault();
             }
 
+            /**
+             * Keydown input event handler
+             *
+             * @todo: refactor: give more description name
+             *
+             * @ngscope
+             * @method keyDownInput
+             *
+             * @param $event
+             */
             scope.keyDownInput = function($event) {
               if($event.which === 13) {
                 scope.options.currentPage = $($event.target).val();
               }
             }
 
+            /**
+             * Sort the grid data server side
+             *
+             * @ngscope
+             * @method gridSort
+             *
+             * @param {object} $event Event
+             * @param {string} property Name of the property to sort
+             */
             scope.gridSort = function($event, property) {
               var fontIconClass, config, property, sortKey, clearSort, originalValue;
               config = ObjectArray.getObjectByPropertyValue(scope.options.columnModel, 'property', property);
@@ -288,7 +487,11 @@ angular.module('nag.grid.grid', [
               }
             }
 
-            //return the sorting data in an array in the correct order
+            /**
+             * Retrieve the sort data
+             *
+             * @returns {array} Sorting data
+             */
             scope.getSortArray = function() {
               var resultArray, x, property;
               resultArray = [];
@@ -305,12 +508,22 @@ angular.module('nag.grid.grid', [
             //scope.$watch('options.data', autoResizeGridColumns);
 
             //for updates to the data after the initial load
+            /**
+             * Auto resize the grid when the data changes
+             *
+             * @ngwatch options.data
+             */
             scope.$watch('options.data', function(oldValue, newValue) {
               if(scope.options.data.length > 0) {
                 $timeout(autoResizeGridColumns, 0);
               }
             });
 
+            /**
+             * Refresh the data set when the items per page changes
+             *
+             * @ngwatch options.itemsPerPage
+             */
             scope.$watch('options.itemsPerPage', function(oldValue, newValue) {
               if(oldValue !== newValue) {
                 if(scope.options.currentPage !== 1) {
@@ -322,6 +535,11 @@ angular.module('nag.grid.grid', [
               }
             });
 
+            /**
+             * Refresh the data set when the current page changes
+             *
+             * @ngwatch options.currentPage
+             */
             scope.$watch('options.currentPage', function(oldValue, newValue) {
               if(!angular.isNumber(scope.options.currentPage) || scope.options.currentPage === 0) {
                 scope.options.currentPage = 1;
@@ -331,8 +549,30 @@ angular.module('nag.grid.grid', [
               getData();
             });
 
+            /**
+             * Whether or not we are display the loading component
+             *
+             * @ngscope
+             * @property {boolean} displayLoading
+             */
             scope.displayLoading = false;
+
+            /**
+             * Unique id for the grid
+             *
+             * @ngscope
+             * @property {mixed} id
+             */
             scope.id = $('grid').length;
+
+            /**
+             * Sort order data
+             *
+             * @todo: refactor: put this into the options in order to be able to define default sort order
+             *
+             * @ngscope
+             * @property {array} sortOrder
+             */
             scope.sortOrder = [];
 
             $timeout(function(){

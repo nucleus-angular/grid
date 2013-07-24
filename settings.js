@@ -1,3 +1,11 @@
+/**
+ * Settings component for the grid system
+ *
+ * @mdoule ng.grid.settings
+ * @ngdirective nagGridSettings
+ *
+ * @nghtmlattribute {empty} nag-grid-settings Tell AngularJS this element is a grid settings component
+ */
 angular.module('nag.grid.settings', [])
 .directive('nagGridSettings', [
   '$compile',

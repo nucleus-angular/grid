@@ -1,3 +1,11 @@
+/**
+ * Header component for the grid system
+ *
+ * @mdoule ng.grid.header
+ * @ngdirective nagGridHeader
+ *
+ * @nghtmlattribute {empty} nag-grid-header Tell AngularJS this element is a grid header component
+ */
 angular.module('nag.grid.header', [])
 .directive('nagGridHeader', [
   '$compile',

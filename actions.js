@@ -1,3 +1,11 @@
+/**
+ * Actions component for the grid system
+ *
+ * @mdoule ng.grid.actions
+ * @ngdirective nagGridActions
+ *
+ * @nghtmlattribute {empty} nag-grid-actions Tell AngularJS this element is a grid actions component
+ */
 angular.module('nag.grid.actions', [])
 .directive('nagGridActions', [
   '$compile',

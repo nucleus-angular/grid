@@ -1,3 +1,11 @@
+/**
+ * loading component for the grid system
+ *
+ * @mdoule ng.grid.loading
+ * @ngdirective nagGridLoading
+ *
+ * @nghtmlattribute {empty} nag-grid-loading Tell AngularJS this element is a grid loading component
+ */
 angular.module('nag.grid.loading', [])
 .directive('nagGridLoading', [
   '$compile',
