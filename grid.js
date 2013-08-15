@@ -576,7 +576,7 @@ angular.module('nag.grid.grid', [
             scope.sortOrder = [];
 
             $timeout(function(){
-              $(element).find('.settings-widget').css('top', $(element).find('.grid-header').outerHeight(true) + 5);
+              $(element).find('.settings').css('top', $(element).find('.grid-header').outerHeight(true) + 5);
             }, 0);
           }
         };
