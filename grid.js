@@ -214,7 +214,6 @@ angular.module('nag.grid.grid', [
                   }
                 }).
                 error(function(data, status, headers, config) {
-                  console.log(data);
                   scope.toggleLoadingDisplay();
                   //todo: proper error handling
                 });
