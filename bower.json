@@ -1,9 +1,10 @@
 {
   "name": "nucleus-angular-grid",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "dependencies": {
     "nucleus-angular-core": "latest",
-    "object-array-utility": "latest"
+    "object-array-utility": "latest",
+    "nucleus-angular-resizable": "latest"
   },
   "devDependencies": {
     "jquery": "1.9.1",
