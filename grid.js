@@ -39,43 +39,43 @@ angular.module('nag.grid.grid', [
              *
              * @ngscope
              * @property {object} options
-             *   @property {string} [option.rootTemplatePath=rootTemplatePath+'/nucleus-angular-grid/assets/templates'] Root path for templates
-             *   @property {string} [option.caption] Caption for grid
-             *   @property {number} [option.currentPage=1] Current page fof data displaying in the grid
-             *   @property {array} [option.data=[]] Current set of data displaying in the grid
+             *   @property {string} [rootTemplatePath=rootTemplatePath+"/nucleus-angular-grid/assets/templates"] Root path for templates
+             *   @property {string} [caption] Caption for grid
+             *   @property {number} [currentPage=1] Current page fof data displaying in the grid
+             *   @property {array} [data=[]] Current set of data displaying in the grid
              *   @todo: implement: implement filters
-             *   @property {array} [option.filters=[]] Filter to apply when retrieving the data for the grid
-             *   @property {function} [option.generateDataUrl] Generates the url to use when retrieving data from the grid
-             *   @property {array} [option.itemsPerPageOptions[10, 20, 30, 40, 50]] The different option the use can choose from from items per page in grid
-             *   @property {number} [option.itemsPerPage=10] The current number of items displaying per page in the grid
-             *   @property {number} [option.maxColumnWidth=0] Maximum column width (0 for no max)
-             *   @property {number} [option.minColumnWidth=50] Minimum column width
-             *   @property {string} [option.remoteDataMethod="GET"] Default http method from retrieving the data for the grid
+             *   @property {array} [filters=[]] Filter to apply when retrieving the data for the grid
+             *   @property {function} [generateDataUrl] Generates the url to use when retrieving data from the grid
+             *   @property {array} [itemsPerPageOptions=[10,20,30,40,50]] The different option the use can choose from from items per page in grid
+             *   @property {number} [itemsPerPage=10] The current number of items displaying per page in the grid
+             *   @property {number} [maxColumnWidth=0] Maximum column width (0 for no max)
+             *   @property {number} [minColumnWidth=50] Minimum column width
+             *   @property {string} [remoteDataMethod="GET"] Default http method from retrieving the data for the grid
              *   @todo: implement: implement reorderable
-             *   @property {boolean} [option.reorderable=false] Whether or not you can reorder the data rows
-             *   @property {boolean} [option.rowMultiSelect=true] Whether or not you can select multiple rows
-             *   @property {boolean} [option.rowSelectable=false] Whether or not you can select rows
-             *   @property {boolean} [option.rowSelectableCheckbox=true] Whether or not to use a checkbox to selct the row
-             *   @property {string} [option.rowSelectionMode="row"] Row selection mode ("row" only option right now)
-             *   @property {string} [option.headerTemplateUrl="header.html"] Header template url
-             *   @property {string} [option.headerTemplate=null] Header template html
-             *   @property {string} [option.footerTemplateUrl="footer.html"] Footer template url
-             *   @property {string} [option.footerTemplate=null] Footer template html
-             *   @property {string} [option.settingsTemplateUrl="settings.html"] Settings template url
-             *   @property {string} [option.settingsTemplate=null] Setting template html
-             *   @property {string} [option.loadingTemplateUrl="loading.html"] Loading template url
-             *   @property {string} [option.loadingTemplat=null] Loading template html
-             *   @property {string} [option.dataTemplateUrl="data.html"] Data template url
-             *   @property {string} [option.dataTemplate=null] Data template html
-             *   @property {string} [option.actionsTemplateUrl="actions.html"] Actions template url
-             *   @property {string} [option.actionsTemplate=null] Actions template html
-             *   @property {boolean} [option.rowShiftMultiSelect] Require shift to be held down when selection multiple rows
-             *   @property {array} [option.selected=[]] Indexes (zero-based) or select row elements
-             *   @property {object} [option.sort={}] Sort information
-             *   @property {boolean} [option.sortMulti=true] Whether or not to allow sorting on multiple columns
-             *   @property {number} [option.totalRecords] Total number of records for the grid
-             *   @property {string} [option.templateUrl="grid.html] Main template url
-             *   @property {string} [option.template=null] Main template html
+             *   @property {boolean} [reorderable=false] Whether or not you can reorder the data rows
+             *   @property {boolean} [rowMultiSelect=true] Whether or not you can select multiple rows
+             *   @property {boolean} [rowSelectable=false] Whether or not you can select rows
+             *   @property {boolean} [rowSelectableCheckbox=true] Whether or not to use a checkbox to selct the row
+             *   @property {string} [rowSelectionMode="row"] Row selection mode ("row" only option right now)
+             *   @property {string} [headerTemplateUrl="header.html"] Header template url
+             *   @property {string} [headerTemplate=null] Header template html
+             *   @property {string} [footerTemplateUrl="footer.html"] Footer template url
+             *   @property {string} [footerTemplate=null] Footer template html
+             *   @property {string} [settingsTemplateUrl="settings.html"] Settings template url
+             *   @property {string} [settingsTemplate=null] Setting template html
+             *   @property {string} [loadingTemplateUrl="loading.html"] Loading template url
+             *   @property {string} [loadingTemplat=null] Loading template html
+             *   @property {string} [dataTemplateUrl="data.html"] Data template url
+             *   @property {string} [dataTemplate=null] Data template html
+             *   @property {string} [actionsTemplateUrl="actions.html"] Actions template url
+             *   @property {string} [actionsTemplate=null] Actions template html
+             *   @property {boolean} [rowShiftMultiSelect] Require shift to be held down when selection multiple rows
+             *   @property {array} [selected=[]] Indexes (zero-based) or select row elements
+             *   @property {object} [sort={}] Sort information
+             *   @property {boolean} [sortMulti=true] Whether or not to allow sorting on multiple columns
+             *   @property {number} [totalRecords] Total number of records for the grid
+             *   @property {string} [templateUrl="grid.html"] Main template url
+             *   @property {string} [template=null] Main template html
              */
 
             /**
@@ -83,23 +83,23 @@ angular.module('nag.grid.grid', [
              *
              * @ngscope
              * @property {object} options.columnModel
-             *   @property {string} [option.columnModel.rootTemplatePath=rootTemplatePath+'/nucleus-angular-grid/assets/templates'] Root path for templates
-             *   @property {string} [options.columnModel.title=null] Text to use as the header in the column of the grid
-             *   @property {string} [options.columnModel.property=null] The property name of the object stored in options.data to pull the data for
-             *   @property {string} [options.columnModel.headerTemplateUrl="header-data-cell.html"] Header data cell template url
-             *   @property {string} [options.columnModel.headerTemplate=null] Header data cell template html
-             *   @property {string} [options.columnModel.templateUrl="data-cell.html"] Data cell template url
-             *   @property {string} [options.columnModel.template=null] Data cell template html
-             *   @property {boolean} [options.columnModel.display=true] Whether or not to display the column
-             *   @property {boolean} [options.columnModel.sortable=false] Whether or not the column is sortable
-             *   @property {boolean} [options.columnModel.resizable=true] Whether or not the column is resizable
+             *   @property {string} [rootTemplatePath=rootTemplatePath+'/nucleus-angular-grid/assets/templates'] Root path for templates
+             *   @property {string} [title=null] Text to use as the header in the column of the grid
+             *   @property {string} [property=null] The property name of the object stored in options.data to pull the data for
+             *   @property {string} [headerTemplateUrl="header-data-cell.html"] Header data cell template url
+             *   @property {string} [headerTemplate=null] Header data cell template html
+             *   @property {string} [templateUrl="data-cell.html"] Data cell template url
+             *   @property {string} [template=null] Data cell template html
+             *   @property {boolean} [display=true] Whether or not to display the column
+             *   @property {boolean} [sortable=false] Whether or not the column is sortable
+             *   @property {boolean} [resizable=true] Whether or not the column is resizable
              *   @todo: implement: implement filterable
-             *   @property {boolean} [options.columnModel.filterable=false] Whether or not the column is filterable
-             *   @property {number} [options.columnModel.width=0] The current width of the column
-             *   @property {number} [options.columnModel.minWidth=0] Minimum width of the column
-             *   @property {number} [options.columnModel.maxWidth=0] Maximum width of the column
-             *   @property {string} [options.columnModel.cssClass=""] String to add to the class of the data cells
-             *   @property {string} [options.columnModel.cssHeaderClass=""] String to add to the class of the header data cells
+             *   @property {boolean} [filterable=false] Whether or not the column is filterable
+             *   @property {number} [width=0] The current width of the column
+             *   @property {number} [minWidth=0] Minimum width of the column
+             *   @property {number} [maxWidth=0] Maximum width of the column
+             *   @property {string} [cssClass=""] String to add to the class of the data cells
+             *   @property {string} [cssHeaderClass=""] String to add to the class of the header data cells
              */
             scope.options = nagDefaults.getGridOptions(scope.options);
 

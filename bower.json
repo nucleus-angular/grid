@@ -2,14 +2,12 @@
   "name": "nucleus-angular-grid",
   "version": "0.2.10",
   "dependencies": {
-    "nucleus-angular-core": "latest",
-    "object-array-utility": "latest",
-    "nucleus-angular-resizable": "latest"
+    "nucleus-angular-core": "master",
+    "object-array-utility": "master",
+    "nucleus-angular-resizable": "master"
   },
   "devDependencies": {
-    "jquery": "1.9.1",
-    "angular": "1.0.6",
-    "angular-mocks": "1.0.6",
-    "unstable-angular-complete": "1.1.4"
+    "jquery": "2.0.3",
+    "unstable-angular-complete": "1.2.0rc2"
   }
 }

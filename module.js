@@ -1,4 +1,8 @@
-//todo: document
+/**
+ * Nucleus Angular Grid Component
+ *
+ * @module nag.grid
+ */
 angular.module('nag.grid', [
   'nag.resizable',
   'nag.grid.actions',
