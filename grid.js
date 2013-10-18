@@ -124,7 +124,7 @@ angular.module('nag.grid.grid', [
                 var property = $(element).find('.data .data-header .cell:eq(' + x + ')').data('property');
 
                 if(property) {
-                  var columnModel = ObjectArray.getObjectByPropertyValue(scope.options.columnModel, 'property', property);
+                  var columnModel = utilities.getObjectByPropertyValue(scope.options.columnModel, 'property', property);
 
                   if(columnModel.width === 0) {
                     minWidth = (scope.options.minColumnWidth >= columnModel.minWidth ? scope.options.minColumnWidth : columnModel.minWidth);
@@ -170,7 +170,7 @@ angular.module('nag.grid.grid', [
                   var property = $(cell).data('property');
 
                   if(property) {
-                    var columnModel = ObjectArray.getObjectByPropertyValue(scope.options.columnModel, 'property', property);
+                    var columnModel = utilities.getObjectByPropertyValue(scope.options.columnModel, 'property', property);
 
                     if(columnModel.resizable) {
                       var minWidth = (scope.options.minColumnWidth >= columnModel.minWidth ? scope.options.minColumnWidth : columnModel.minWidth);
@@ -438,7 +438,7 @@ angular.module('nag.grid.grid', [
              */
             scope.gridSort = function($event, property) {
               var fontIconClass, config, property, sortKey, clearSort, originalValue;
-              config = ObjectArray.getObjectByPropertyValue(scope.options.columnModel, 'property', property);
+              config = utilities.getObjectByPropertyValue(scope.options.columnModel, 'property', property);
 
               clearSort = function() {
                 for(sortKey in scope.options.sort) {
