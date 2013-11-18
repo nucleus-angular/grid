@@ -6,7 +6,9 @@
  *
  * @nghtmlattribute {empty} nag-grid-data-cell Tell AngularJS this element is a grid data cell component
  */
-angular.module('nag.grid.dataCell', [])
+angular.module('nag.grid.dataCell', [
+  'nag.core'
+])
 .directive('nagGridDataCell', [
   '$compile',
   '$http',
@@ -20,7 +22,7 @@ angular.module('nag.grid.dataCell', [])
         return {
           pre: function(scope, element, attributes) {
             var template = scope.$eval(attributes.template);
-            $(element).addClass('grid-data-cell');
+            element.addClass('grid-data-cell');
 
             var html = nagHelper.getAsyncTemplate(template, scope.options);
             element.append($compile(html)(scope));

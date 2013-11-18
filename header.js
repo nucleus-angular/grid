@@ -6,7 +6,9 @@
  *
  * @nghtmlattribute {empty} nag-grid-header Tell AngularJS this element is a grid header component
  */
-angular.module('nag.grid.header', [])
+angular.module('nag.grid.header', [
+  'nag.core'
+])
 .directive('nagGridHeader', [
   '$compile',
   '$http',

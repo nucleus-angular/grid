@@ -6,7 +6,9 @@
  *
  * @nghtmlattribute {empty} nag-grid-settings Tell AngularJS this element is a grid settings component
  */
-angular.module('nag.grid.settings', [])
+angular.module('nag.grid.settings', [
+  'nag.core'
+])
 .directive('nagGridSettings', [
   '$compile',
   '$http',

@@ -4,7 +4,7 @@
  * @module nag.grid
  */
 angular.module('nag.grid', [
-  'nag.resizable',
+  'nag.attribute',
   'nag.grid.actions',
   'nag.grid.data',
   'nag.grid.dataCell',

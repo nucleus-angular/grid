@@ -6,7 +6,9 @@
  *
  * @nghtmlattribute {empty} nag-grid-actions Tell AngularJS this element is a grid actions component
  */
-angular.module('nag.grid.actions', [])
+angular.module('nag.grid.actions', [
+  'nag.core'
+])
 .directive('nagGridActions', [
   '$compile',
   '$http',

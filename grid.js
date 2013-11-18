@@ -40,7 +40,6 @@ angular.module('nag.grid.grid', [
              * @ngscope
              * @property {object} options
              *   @property {string} [rootTemplatePath=rootTemplatePath+"/nucleus-angular-grid/assets/templates"] Root path for templates
-             *   @property {string} [caption] Caption for grid
              *   @property {number} [currentPage=1] Current page fof data displaying in the grid
              *   @property {array} [data=[]] Current set of data displaying in the grid
              *   @todo: implement: implement filters
@@ -56,7 +55,6 @@ angular.module('nag.grid.grid', [
              *   @property {boolean} [rowMultiSelect=true] Whether or not you can select multiple rows
              *   @property {boolean} [rowSelectable=false] Whether or not you can select rows
              *   @property {boolean} [rowSelectableCheckbox=true] Whether or not to use a checkbox to selct the row
-             *   @property {string} [rowSelectionMode="row"] Row selection mode ("row" only option right now)
              *   @property {string} [headerTemplateUrl="header.html"] Header template url
              *   @property {string} [headerTemplate=null] Header template html
              *   @property {string} [footerTemplateUrl="footer.html"] Footer template url
@@ -69,13 +67,17 @@ angular.module('nag.grid.grid', [
              *   @property {string} [dataTemplate=null] Data template html
              *   @property {string} [actionsTemplateUrl="actions.html"] Actions template url
              *   @property {string} [actionsTemplate=null] Actions template html
-             *   @property {boolean} [rowShiftMultiSelect] Require shift to be held down when selection multiple rows
+             *   @property {boolean} [rowKeyboardMultiSelect] Require the keyboard alt key to be held to select multiple rows
              *   @property {array} [selected=[]] Indexes (zero-based) or select row elements
              *   @property {object} [sort={}] Sort information
-             *   @property {boolean} [sortMulti=true] Whether or not to allow sorting on multiple columns
+             *   @property {boolean} [multiSorting=true] Whether or not to allow sorting on multiple columns
              *   @property {number} [totalRecords] Total number of records for the grid
              *   @property {string} [templateUrl="grid.html"] Main template url
              *   @property {string} [template=null] Main template html
+             *   @property {boolean} [showSettingsToggle=true] Show the toggle icon for showing/hiding the settings
+             *   @property {function|null} [parseResponse=null] A function to use to parse the data, must return an object with a property data and totalRecords
+             *   @property {boolean} [hasActions=false] Whether or not to show the actions column
+             *   @property {string} [selectionMode="row"] Selection mode
              */
 
             /**
@@ -191,9 +193,7 @@ angular.module('nag.grid.grid', [
                       }).bind("resize", function (e, ui) {
                         //height should always be 100%
                         $(this).css("height", "100%");
-                      });;
-                      $(cell).resize(function() {
-                        $(element).find('.data .row .cell.' + columnModel.property).width($(this).width());
+                        $(element).find('.data .row .cell.' + columnModel.property).width(ui.size.width);
                       });
                     }
                   }
@@ -207,8 +207,14 @@ angular.module('nag.grid.grid', [
                 $http({method: scope.options.remoteDataMethod, url: scope.options.generateDataUrl.apply(scope, [])}).
                 success(function(data, status, headers, config) {
                   if(angular.isObject(data)) {
-                    scope.options.data = data.data.data;
-                    scope.options.totalRecords = data.data.meta.totalRecords;
+                    if(_.isFunction(scope.options.parseResponse)) {
+                      var processedData = (scope.options.parseResponse(data));
+                      scope.options.data = processedData.data;
+                      scope.options.totalRecords = processedData.totalRecords
+                    } else {
+                      scope.options.data = data.data.data;
+                      scope.options.totalRecords = data.data.meta.totalRecords;
+                    }
                   } else {
                     scope.toggleLoadingDisplay();
                   }
@@ -244,20 +250,20 @@ angular.module('nag.grid.grid', [
              *
              * @param {object} $event Event
              * @param {number} recordNumber Record number (one-based) to toggle selection state
-             * @param {string} type Type of selection (must match scope.options.rowSelectionMode is order for selection state to toggle)
+             * @param {string} selectionMode The mode of the selection active for the grid
              */
-            scope.toggleRecordSelection = function($event, recordNumber, type) {
-              if(type === scope.options.rowSelectionMode) {
+            scope.toggleRecordSelection = function($event, recordNumber, selectionMode) {
+              if(selectionMode === scope.options.selectionMode) {
                 recordNumber += 1;
 
                 if(scope.options.selected.indexOf(recordNumber) === -1) {
-                  if(scope.options.rowMultiSelect !== true || (scope.options.rowShiftMultiSelect === true && $event.shiftKey !== true)) {
-                    scope.options.selected.length = 0;
+                  if(scope.options.rowMultiSelect !== true || (scope.options.rowKeyboardMultiSelect === true && $event.altKey !== true)) {
+                    scope.options.selected = [];
                   }
 
                   scope.options.selected.push(recordNumber);
                 } else {
-                  scope.options.selected.remove(recordNumber);
+                  scope.options.selected.splice(scope.options.selected.indexOf(recordNumber), 1);
                 }
               }
             }
@@ -452,7 +458,7 @@ angular.module('nag.grid.grid', [
                 property = config.property;
                 if(scope.options.sort.hasOwnProperty(property)) {
                   originalValue = scope.options.sort[property];
-                  if((scope.options.sortMulti !== true || $event.shiftKey !== true) && Object.keys(scope.options.sort).length > 0) {
+                  if((scope.options.multiSorting !== true || $event.altKey !== true) && Object.keys(scope.options.sort).length > 0) {
                     clearSort();
                     scope.sortOrder.push(property);
                   }
@@ -460,7 +466,7 @@ angular.module('nag.grid.grid', [
                   scope.options.sort[property] = (originalValue === 'desc' ? 'asc' : 'desc');
                 } else {
                   //lets see if we need to remove the other sort options
-                  if((scope.options.sortMulti !== true || $event.shiftKey !== true) && Object.keys(scope.options.sort).length > 0) {
+                  if((scope.options.multiSorting !== true || $event.altKey !== true) && Object.keys(scope.options.sort).length > 0) {
                     clearSort();
                   }
 

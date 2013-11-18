@@ -6,7 +6,9 @@
  *
  * @nghtmlattribute {empty} nag-grid-header-data-cell Tell AngularJS this element is a grid header data cell component
  */
-angular.module('nag.grid.headerDataCell', [])
+angular.module('nag.grid.headerDataCell', [
+  'nag.core'
+])
 .directive('nagGridHeaderDataCell', [
   '$compile',
   '$http',

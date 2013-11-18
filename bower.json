@@ -4,10 +4,18 @@
   "dependencies": {
     "javascript-utilities": "master",
     "nucleus-angular-core": "master",
-    "nucleus-angular-resizable": "master"
+    "nucleus-angular-resizable": "master",
+    "nucleus-angular-attribute": "master"
   },
   "devDependencies": {
-    "jquery": "1.10.2",
-    "unstable-angular-complete": "1.2.0rc3"
+    "jquery": "1.10.x",
+    "lodash": "1.2.1",
+    "moment": "2.0.0",
+    "modernizr": "2.6.2",
+    "angular": "1.2.0",
+    "angular-animate": "1.2.0",
+    "angular-ui-router": "0.2.0",
+    "nucleus-angular-sass-framework": "master",
+    "angular-mockable-http-provider": "master"
   }
 }

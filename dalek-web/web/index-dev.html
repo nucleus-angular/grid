@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--[if IE 8]>         <html class="no-js lt-ie9" ng-app="app"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" ng-app="app"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- START-CSS-MIN:app/build/main.css -->
+    <link type="text/css" rel="stylesheet" href="app/styles/main.css">
+    <link type="text/css" rel="stylesheet" href="components/nucleus-angular-resizable/assets/styles/ui-interactions.css">
+    <!-- END-CSS-MIN -->
+
+    <base href="/">
+  </head>
+  <body>
+    <div class="page">
+      <header ui-view="header"></header>
+      <div class="main-content" ui-view></div>
+      <footer ui-view="footer"></footer>
+    </div>
+    
+    <script type="text/javascript" src="components/lodash/dist/lodash.js"></script>
+
+    <!-- START-JS-MIN:app/build/libraries.js -->
+    <script type="text/javascript" src="components/javascript-utilities/utilities.js"></script>
+    <script type="text/javascript" src="components/modernizr/modernizr.js"></script>
+    <script type="text/javascript" src="components/moment/moment.js"></script>
+    <script type="text/javascript" src="components/jquery/jquery.js"></script>
+    <script type="text/javascript" src="components/nucleus-angular-resizable/ui-interactions.js"></script>
+    <script type="text/javascript" src="components/angular/angular.js"></script>
+    <script type="text/javascript" src="components/angular-mockable-http-provider/mockable-http-provider.js"></script>
+    <script type="text/javascript" src="components/angular-ui-router/release/angular-ui-router.js"></script>
+
+    <script type="text/javascript" src="components/nucleus-angular-core/module.js"></script>
+    <script type="text/javascript" src="components/nucleus-angular-core/helper.js"></script>
+    <script type="text/javascript" src="components/nucleus-angular-core/defaults.js"></script>
+    <script type="text/javascript" src="components/nucleus-angular-attribute/attribute.js"></script>
+    <script type="text/javascript" src="components/nucleus-angular-grid/module.js"></script>
+    <script type="text/javascript" src="components/nucleus-angular-grid/actions.js"></script>
+    <script type="text/javascript" src="components/nucleus-angular-grid/data-cell.js"></script>
+    <script type="text/javascript" src="components/nucleus-angular-grid/data.js"></script>
+    <script type="text/javascript" src="components/nucleus-angular-grid/footer.js"></script>
+    <script type="text/javascript" src="components/nucleus-angular-grid/grid.js"></script>
+    <script type="text/javascript" src="components/nucleus-angular-grid/header-data-cell.js"></script>
+    <script type="text/javascript" src="components/nucleus-angular-grid/header.js"></script>
+    <script type="text/javascript" src="components/nucleus-angular-grid/loading.js"></script>
+    <script type="text/javascript" src="components/nucleus-angular-grid/settings.js"></script>
+    <!-- END-JS-MIN -->
+
+    <!-- START-JS-MIN:app/build/application.js -->
+    <script type="text/javascript" src="app/application.js"></script>
+
+    <script type="text/javascript" src="app/components/core/module.js"></script>
+
+    <script type="text/javascript" src="app/components/home/module.js"></script>
+    <script type="text/javascript" src="app/components/home/home.js"></script>
+    <!-- END-JS-MIN -->
+  
+    <script type="text/javascript" src="app/components/core/constants.js"></script>
+  </body>
+</html>

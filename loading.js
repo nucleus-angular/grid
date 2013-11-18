@@ -6,7 +6,9 @@
  *
  * @nghtmlattribute {empty} nag-grid-loading Tell AngularJS this element is a grid loading component
  */
-angular.module('nag.grid.loading', [])
+angular.module('nag.grid.loading', [
+  'nag.core'
+])
 .directive('nagGridLoading', [
   '$compile',
   '$http',
