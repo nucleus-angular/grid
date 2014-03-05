@@ -19,13 +19,13 @@ angular.module('nag.grid.grid.configurator', [
 ])
 .run([
   'nagDefaults',
-  function(nagDefaults) {
+  'nagHelper',
+  function(nagDefaults, nagHelper) {
     /**
      * Options
      *
      * @ngscope
      * @property {object} options
-     *   @property {string} [rootTemplatePath=rootTemplatePath+"/nucleus-angular-grid/assets/templates"] Root path for templates
      *   @property {number} [currentPage=1] Current page fof data displaying in the grid
      *   @property {array} [data=[]] Current set of data displaying in the grid
      *   @todo: implement: implement filters
@@ -66,7 +66,6 @@ angular.module('nag.grid.grid.configurator', [
      *   @property {string} [selectionMode="row"] Selection mode
      */
     nagDefaults.setOptions('grid', {
-      rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-grid/assets/templates',
       caption: null,
       columnModel: {},
       currentPage: 1,
@@ -85,24 +84,24 @@ angular.module('nag.grid.grid.configurator', [
       rowMultiSelect: true,
       rowSelectable: false,
       rowSelectableCheckbox: true,
-      headerTemplateUrl: 'header.html', ///
+      headerTemplateUrl: 'nucleus-angular-grid/assets/templates/header.html', ///
       headerTemplate: null, ///
-      footerTemplateUrl: 'footer.html', ///
+      footerTemplateUrl: 'nucleus-angular-grid/assets/templates/footer.html', ///
       footerTemplate: null, ///
-      settingsTemplateUrl: 'settings.html', ///
+      settingsTemplateUrl: 'nucleus-angular-grid/assets/templates/settings.html', ///
       settingsTemplate: null, ///
-      loadingTemplateUrl: 'loading.html', ///
+      loadingTemplateUrl: 'nucleus-angular-grid/assets/templates/loading.html', ///
       loadingTemplate: null, ///
-      dataTemplateUrl: 'data.html', ///
+      dataTemplateUrl: 'nucleus-angular-grid/assets/templates/data.html', ///
       dataTemplate: null, ///
-      actionsTemplateUrl: 'actions.html', ///
+      actionsTemplateUrl: 'nucleus-angular-grid/assets/templates/actions.html', ///
       actionsTemplate: null, ///
       rowKeyboardMultiSelect: false,
       selected: [],
       sort: {},
       multiSorting: true,
       totalRecords: 0,
-      templateUrl: 'grid.html', ///
+      templateUrl: 'nucleus-angular-grid/assets/templates/grid.html', ///
       template: null, ///
       hasActions: false,
       selectionMode: 'row'
@@ -113,7 +112,6 @@ angular.module('nag.grid.grid.configurator', [
      *
      * @ngscope
      * @property {object} options.columnModel
-     *   @property {string} [rootTemplatePath=rootTemplatePath+'/nucleus-angular-grid/assets/templates'] Root path for templates
      *   @property {string} [title=null] Text to use as the header in the column of the grid
      *   @property {string} [property=null] The property name of the object stored in options.data to pull the data for
      *   @property {string} [headerTemplateUrl="header-data-cell.html"] Header data cell template url
@@ -130,14 +128,14 @@ angular.module('nag.grid.grid.configurator', [
      *   @property {number} [maxWidth=0] Maximum width of the column
      *   @property {string} [cssClass=""] String to add to the class of the data cells
      *   @property {string} [cssHeaderClass=""] String to add to the class of the header data cells
+     *   @property {function} [getTemplatePath=function(){}] Function used to get template paths
      */
     nagDefaults.setOptions('gridColumnModel', {
-      rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-grid/assets/templates',
       title: null,
       property: null,
-      headerTemplateUrl: 'header-data-cell.html', ///
+      headerTemplateUrl: 'nucleus-angular-grid/assets/templates/header-data-cell.html', ///
       headerTemplate: null, ///
-      templateUrl: 'data-cell.html', ///
+      templateUrl: 'nucleus-angular-grid/assets/templates/data-cell.html', ///
       template: null, ///
       display: true,
       sortable: false,
@@ -147,7 +145,10 @@ angular.module('nag.grid.grid.configurator', [
       minWidth: 0,
       maxWidth: 0,
       cssClass: '',
-      cssHeaderClass: ''
+      cssHeaderClass: '',
+      getTemplatePath: function(templateName) {
+        return nagHelper.getTemplatePath('gridColumnModel', templateName);
+      }
     });
 
     nagDefaults.setOptionsGetter('gridOptions', function(options) {
@@ -155,8 +156,7 @@ angular.module('nag.grid.grid.configurator', [
         var gridColumnOptions = nagDefaults.getOptions('gridColumnModel');
 
         angular.forEach(columnModel, function(value, key) {
-          //todo: research: this breaks without the JSON.parse(angular.toJson()), no idea why
-          columnModel[key] = angular.extend(JSON.parse(angular.toJson(gridColumnOptions)), columnModel[key]);
+          columnModel[key] = angular.extend(_.clone(gridColumnOptions, true), columnModel[key]);
         });
 
         return columnModel;
@@ -195,7 +195,7 @@ angular.module('nag.grid.grid', [
           pre: function(scope, element, attributes) {
             scope.options = nagDefaults.getOptions('gridOptions', scope.options);
 
-            var html = $(nagHelper.getAsyncTemplate(scope.options.templateUrl, scope.options));
+            var html = $(nagHelper.getAsyncTemplate(nagHelper.getTemplatePath('grid'), scope.options));
             $(element).append($compile(html)(scope));
 
             $(element).addClass('grid');

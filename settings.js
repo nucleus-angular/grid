@@ -21,7 +21,7 @@ angular.module('nag.grid.settings', [
       compile: function() {
         return {
           pre: function(scope, element) {
-            var template = scope.options.settingsTemplateUrl;
+            var template = nagHelper.getTemplatePath('grid', 'settings');
             $(element).addClass('grid-settings');
 
             var html = nagHelper.getAsyncTemplate(template, scope.options);

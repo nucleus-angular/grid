@@ -22,7 +22,7 @@ angular.module('nag.grid.data', [
       compile: function() {
         return {
           pre: function(scope, element) {
-            var template = scope.options.dataTemplateUrl;
+            var template = nagHelper.getTemplatePath('grid', 'data');
             $(element).addClass('grid-data');
 
             var html = nagHelper.getAsyncTemplate(template, scope.options);

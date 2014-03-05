@@ -1,10 +1,10 @@
 <div class="data" ng-class="{'selectable': options.rowSelectable}">
   <ul class="data-header row">
-    <li class="cell selection-toggle" ng-if="options.rowSelectable && options.rowSelectableCheckbox"><input nag-attribute="{'disabled::true': !options.rowMultiSelect}" type="checkbox" ng-checked="areAllRecordsSelected()" ng-click="toggleAllRecordSelection()"/></li><li ng-if="options.hasActions" class="cell grid-actions-column selection-toggle">Actions</li><li class="cell {{ config.property }} {{ config.cssClass }} {{ config.cssHeaderClass }}" data-property="{{ config.property }}" ng-show="config.display" nag-grid-header-data-cell ng-repeat="config in options.columnModel" data-template="config.headerTemplateUrl"></li>
+    <li class="cell selection-toggle" ng-if="options.rowSelectable && options.rowSelectableCheckbox"><input nag-attribute="{'disabled::true': !options.rowMultiSelect}" type="checkbox" ng-checked="areAllRecordsSelected()" ng-click="toggleAllRecordSelection()"/></li><li ng-if="options.hasActions" class="cell grid-actions-column selection-toggle">Actions</li><li class="cell {{ config.property }} {{ config.cssClass }} {{ config.cssHeaderClass }}" data-property="{{ config.property }}" ng-show="config.display" nag-grid-header-data-cell ng-repeat="config in options.columnModel track by config.property" data-template="config.getTemplatePath('header')"></li>
   </ul>
   <ul class="record row" ng-repeat="(recordKey, data) in options.data" ng-class="{'selected': isRecordSelected(recordKey)}" ng-click="toggleRecordSelection($event, recordKey, 'row')">
     <li class="cell selection-toggle" ng-if="options.rowSelectable && options.rowSelectableCheckbox">
       <input type="checkbox" ng-checked="isRecordSelected(recordKey)"  ng-click="toggleRecordSelection($event, recordKey, 'checkbox')" />
-    </li><li ng-if="options.hasActions" class="cell grid-actions-column" grid-actions>&nbsp;</li><li class="cell {{ config.property }} {{ config.cssClass }}" data-property="{{ config.property }}" ng-show="config.display" nag-grid-data-cell ng-repeat="config in options.columnModel" data-template="config.templateUrl"></li>
+    </li><li ng-if="options.hasActions" class="cell grid-actions-column" grid-actions>&nbsp;</li><li class="cell {{ config.property }} {{ config.cssClass }}" data-property="{{ config.property }}" ng-show="config.display" nag-grid-data-cell ng-repeat="config in options.columnModel track by config.property" data-template="config.getTemplatePath()"></li>
   </ul>
 </div>

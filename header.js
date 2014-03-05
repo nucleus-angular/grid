@@ -21,7 +21,7 @@ angular.module('nag.grid.header', [
       compile: function() {
         return {
           pre: function(scope, element) {
-            var template = scope.options.headerTemplateUrl;
+            var template = nagHelper.getTemplatePath('grid', 'header');
             $(element).addClass('grid-header');
 
             var html = nagHelper.getAsyncTemplate(template, scope.options);

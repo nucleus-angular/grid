@@ -21,7 +21,7 @@ angular.module('nag.grid.actions', [
       compile: function() {
         return {
           pre: function(scope, element, attributes) {
-            var html = nagHelper.getAsyncTemplate(scope.options.actionsTemplateUrl, scope.options);
+            var html = nagHelper.getAsyncTemplate(nagHelper.getTemplatePath('grid', 'actions'), scope.options);
             $(element).append($compile(html)(scope));
             $(element).addClass('grid-actions');
           }
