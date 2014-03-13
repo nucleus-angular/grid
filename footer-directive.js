@@ -6,9 +6,7 @@
  *
  * @nghtmlattribute {empty} nag-grid-footer Tell AngularJS this element is a grid footer component
  */
-angular.module('nag.grid.footer', [
-  'nag.core'
-])
+angular.module('nag.grid')
 .directive('nagGridFooter', [
   '$compile',
   '$http',

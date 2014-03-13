@@ -6,9 +6,7 @@
  *
  * @nghtmlattribute {empty} nag-grid-data Tell AngularJS this element is a grid data component
  */
-angular.module('nag.grid.data', [
-  'nag.core'
-])
+angular.module('nag.grid')
 .directive('nagGridData', [
   '$compile',
   '$http',

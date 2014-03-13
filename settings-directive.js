@@ -1,15 +1,13 @@
 /**
- * loading component for the grid system
+ * Settings component for the grid system
  *
- * @mdoule ng.grid.loading
- * @ngdirective nagGridLoading
+ * @mdoule ng.grid.settings
+ * @ngdirective nagGridSettings
  *
- * @nghtmlattribute {empty} nag-grid-loading Tell AngularJS this element is a grid loading component
+ * @nghtmlattribute {empty} nag-grid-settings Tell AngularJS this element is a grid settings component
  */
-angular.module('nag.grid.loading', [
-  'nag.core'
-])
-.directive('nagGridLoading', [
+angular.module('nag.grid')
+.directive('nagGridSettings', [
   '$compile',
   '$http',
   '$templateCache',
@@ -21,8 +19,8 @@ angular.module('nag.grid.loading', [
       compile: function() {
         return {
           pre: function(scope, element) {
-            var template = nagHelper.getTemplatePath('grid', 'loading');
-            $(element).addClass('grid-loading');
+            var template = nagHelper.getTemplatePath('grid', 'settings');
+            $(element).addClass('grid-settings');
 
             var html = nagHelper.getAsyncTemplate(template, scope.options);
             element.append($compile(html)(scope));

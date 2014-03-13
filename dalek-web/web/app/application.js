@@ -2,7 +2,8 @@ angular.module('app', [
   'httpMocker',
   'app.core',
   'app.home',
-  'nag.grid'
+  'nag.grid',
+  'nag.attribute'
 ])
 .config([
   '$locationProvider',
