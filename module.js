@@ -1,5 +1,13 @@
 /**
- * Nucleus Angular Grid Component
+ * # Grid
+ *
+ * Render tabular data in a grid with the follows features:
+ *
+ * - pagination
+ * - sorting
+ * - column toggling
+ * - selecting rows
+ * - action column
  *
  * @module nag.grid
  */
@@ -10,6 +18,11 @@ angular.module('nag.grid', [
   'nagDefaults',
   'nagHelper',
   function(nagDefaults, nagHelper) {
+    /**
+     * @ignore Property definations for grid directive
+     *
+     * @ngdirective nagGrid
+     */
     /**
      * Options
      *

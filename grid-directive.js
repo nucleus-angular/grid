@@ -9,7 +9,7 @@
  * @todo: think: should we have disable normal text selection and add other functionality that makes is easier to select the data from a cell when row selection is on
  * @todo: think: should we have either or both hitting esc of clicking outside the column-selection area hide it is the column selection area is showing
  *
- * @module nag.grid.grid
+ * @module nag.grid
  * @ngdirective nagGrid
  *
  * @nghtmlattribute {object} nag-grid Tells AngularJS this element is a grid component and object pased in overwrite defaults for $scope.options

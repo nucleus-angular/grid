@@ -1,7 +1,7 @@
 /**
  * Actions component for the grid system
  *
- * @mdoule ng.grid.actions
+ * @mdoule ng.grid
  * @ngdirective nagGridActions
  *
  * @nghtmlattribute {empty} nag-grid-actions Tell AngularJS this element is a grid actions component

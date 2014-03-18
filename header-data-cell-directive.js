@@ -1,7 +1,7 @@
 /**
  * HeaderDataCell component for the grid system
  *
- * @mdoule ng.grid.headerDataCell
+ * @mdoule ng.grid
  * @ngdirective nagGridHeaderDataCell
  *
  * @nghtmlattribute {empty} nag-grid-header-data-cell Tell AngularJS this element is a grid header data cell component

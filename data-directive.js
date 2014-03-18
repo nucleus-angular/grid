@@ -1,7 +1,7 @@
 /**
  * Data component for the grid system
  *
- * @mdoule ng.grid.data
+ * @mdoule ng.grid
  * @ngdirective nagGridData
  *
  * @nghtmlattribute {empty} nag-grid-data Tell AngularJS this element is a grid data component

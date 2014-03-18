@@ -1,7 +1,7 @@
 /**
  * Footer component for the grid system
  *
- * @mdoule ng.grid.Footer
+ * @mdoule ng.grid
  * @ngdirective nagGridFooter
  *
  * @nghtmlattribute {empty} nag-grid-footer Tell AngularJS this element is a grid footer component
