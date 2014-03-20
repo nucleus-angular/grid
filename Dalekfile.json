@@ -2,6 +2,7 @@
   "tests": [
     "dalek/grid.js"
   ],
+  "logLevel": "1",
   "browser": [
     "chrome"
   ]
