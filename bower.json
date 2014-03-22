@@ -1,11 +1,11 @@
 {
   "name": "nucleus-angular-grid",
-  "version": "0.2.10",
+  "version": "0.5.0",
   "dependencies": {
     "javascript-utilities": "master",
-    "nucleus-angular-core": "master",
-    "nucleus-angular-resizable": "master",
-    "nucleus-angular-attribute": "master"
+    "nucleus-angular-core": "0.5.0",
+    "nucleus-angular-resizable": "0.5.0",
+    "nucleus-angular-attribute": "0.5.0"
   },
   "devDependencies": {
     "jquery": "2.x.x",
@@ -14,7 +14,7 @@
     "angular": "1.2.x",
     "angular-animate": "1.2.x",
     "angular-ui-router": "0.2.0",
-    "nucleus-angular-sass-framework": "master",
+    "nucleus-angular-sass-framework": "0.5.0",
     "angular-mockable-http-provider": "master"
   }
 }
